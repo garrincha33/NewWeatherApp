@@ -87,6 +87,28 @@ class CurrentWeather {
                     
                 }
                 
+                if let weather = dict["weather"] as? [Dictionary<String, AnyObject>] {
+                    
+                    if let main = weather[0]["main"] as? String {
+                        
+                        self._weatherType = main.capitalized
+                        
+                    }
+                    
+                }
+                
+                if let main = dict["main"] as? Dictionary<String, AnyObject> {
+                    
+                    if let currentTemp = main["temp"] as? Double {
+            
+                        let kelvinToCelcius = Double(round(currentTemp - 273.15))
+                        
+                        self._currentTemp = kelvinToCelcius
+                        
+                    }
+                    
+                }
+   
             }
 
         }
