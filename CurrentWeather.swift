@@ -69,7 +69,7 @@ class CurrentWeather {
         
     }
     
-    func downloadWeatherDetails(completed: DownloadComplete) {
+    func downloadWeatherDetails(completed: @escaping DownloadComplete) {
         
         let currentWeatherURL = URL(string: CURRENT_WEATHER_URL)!
         
@@ -105,16 +105,19 @@ class CurrentWeather {
                         
                         self._currentTemp = kelvinToCelcius
                         
+                        print(self._currentTemp)
+                        
                     }
                     
                 }
    
             }
-
+            
+            completed()
         }
         
-        completed()
-   
+        
     }
-
+    
+    
 }

@@ -41,15 +41,15 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cardiff, UK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TaT-37-s0t">
-                                                        <fontDescription key="fontDescription" name="Knockout-71FullMiddlewt" family="Knockout" pointSize="16"/>
+                                                        <fontDescription key="fontDescription" name="Knockout-71FullMiddlewt" family="Knockout" pointSize="23"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="74" translatesAutoresizingMaskIntoConstraints="NO" id="SLz-gV-dfa">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="76" translatesAutoresizingMaskIntoConstraints="NO" id="SLz-gV-dfa">
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="emJ-KT-dPQ"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="emJ-KT-dPQ"/>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rain" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxN-6f-OBZ">
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="V8B-Ks-Ffl"/>
@@ -83,7 +83,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LGB-aa-tg1" id="9G5-ce-lOj">
-                                            <frame key="frameInset" width="320" height="79"/>
+                                            <frame key="frameInset" width="320" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sl3-PG-5j3">
@@ -161,8 +161,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="_currentWeather" destination="cxN-6f-OBZ" id="A5B-kg-xNm"/>
                         <outlet property="cityLable" destination="TaT-37-s0t" id="O9k-7N-6aX"/>
-                        <outlet property="currentWeather" destination="cxN-6f-OBZ" id="JoO-C0-fIL"/>
                         <outlet property="dateLable" destination="PBW-jc-EgH" id="2iN-hb-VTz"/>
                         <outlet property="tableView" destination="aPU-FP-xmv" id="BHc-md-b8Q"/>
                         <outlet property="tempLable" destination="VAX-8b-8Yb" id="FtO-Il-KeY"/>
@@ -171,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133" y="-369"/>
+            <point key="canvasLocation" x="-236" y="-582"/>
         </scene>
     </scenes>
 </document>

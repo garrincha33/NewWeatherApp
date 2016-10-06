@@ -11,6 +11,8 @@ import UIKit
 
 class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    var getWeather : CurrentWeather!
+    
     @IBOutlet weak var dateLable: UILabel!
     
     @IBOutlet weak var tempLable: UILabel!
@@ -19,26 +21,34 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var weatherImg: UIImageView!
     
-    @IBOutlet weak var currentWeather: UILabel!
+    @IBOutlet weak var _currentWeather: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     
-    var currenWeather = CurrentWeather()
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+     
         tableView.delegate = self
         tableView.dataSource = self
         
-        currenWeather.downloadWeatherDetails { 
-            
-            //setup UI Download Data
-            
-            
+        getWeather =  CurrentWeather()
+        getWeather.downloadWeatherDetails {
+   
+            self.updateUI()
         }
+        
  
+    }
+    
+    func updateUI() {
+        
+        dateLable.text = getWeather.date
+        tempLable.text = "\(getWeather.currentTemp)"
+        _currentWeather.text = "\(getWeather.weatherType)"
+        cityLable.text = getWeather.cityName
+        weatherImg.image = UIImage(named: getWeather.weatherType)
+
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
