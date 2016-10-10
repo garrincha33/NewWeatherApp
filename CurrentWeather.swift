@@ -106,6 +106,7 @@ class CurrentWeather {
                         self._currentTemp = kelvinToCelcius
                         
                         print(self._currentTemp)
+               
                         
                     }
                     

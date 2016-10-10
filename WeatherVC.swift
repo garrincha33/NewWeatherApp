@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Alamofire
 
 
 class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var getWeather : CurrentWeather!
+    var forcast: Forcast!
+    var forcasts = [Forcast]()
     
     @IBOutlet weak var dateLable: UILabel!
     
@@ -33,12 +36,49 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tableView.dataSource = self
         
         getWeather =  CurrentWeather()
-        getWeather.downloadWeatherDetails {
-   
-            self.updateUI()
-        }
-        
  
+        getWeather.downloadWeatherDetails {
+            
+            self.downloadForcastData {
+                
+                self.updateUI()
+                
+            }
+
+        }
+
+    }
+    
+    func downloadForcastData(completed: @escaping DownloadComplete) {
+        
+        //downloading forcast weather data here
+        
+        let forcastURL = URL(string: FORCAST_URL)
+        Alamofire.request(forcastURL!).responseJSON { response in
+        
+        let result = response.result
+            
+            if let dict = result.value as? Dictionary<String, AnyObject> {
+                
+                if let list = dict["list"] as? [Dictionary<String, AnyObject>] {
+                    
+                    for obj in list {
+                        
+                        let forcast = Forcast(weatherDict: obj)
+                        self.forcasts.append(forcast)
+                        
+                        print(obj.debugDescription)
+                        
+                    }
+                    
+                }
+                
+                
+            }
+            
+            completed()            
+        }
+
     }
     
     func updateUI() {
