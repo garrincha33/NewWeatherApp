@@ -8,9 +8,10 @@
 
 import UIKit
 import Alamofire
+import CoreLocation
 
 
-class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate  {
     
     var getWeather : CurrentWeather!
     var forcast: Forcast!
@@ -28,9 +29,17 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
+    let locationManager = CLLocationManager()
+    var currentLocation: CLLocation!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        
      
         tableView.delegate = self
         tableView.dataSource = self
@@ -42,6 +51,8 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             self.downloadForcastData {
                 
                 self.updateUI()
+                
+                self.tableView.reloadData()
                 
             }
 
@@ -71,9 +82,10 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                         
                     }
                     
+                    self.forcasts.remove(at: 0)
+                    
                 }
-                
-                
+  
             }
             
             completed()            
@@ -98,15 +110,23 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        return cell
-        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WeatherCell {
+            
+            let forcast = forcasts[indexPath.row]
+            cell.configureCell(forcast: forcast)
+            return cell
+ 
+        } else {
+            
+            return WeatherCell()
+            
+        }
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
  
-        return 6
+        return forcasts.count
     }
 
 }
